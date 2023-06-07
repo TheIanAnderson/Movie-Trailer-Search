@@ -10,7 +10,7 @@ $("#search-button").on('click', function () {
     url: movieURL,
     method: "GET"
   }).then(function (res) {
-    console.log(res.results);   
+    console.log(res.results[0]);   
     });   
 });
 
