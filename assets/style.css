@@ -1,0 +1,21 @@
+body {
+    background:url("download.jpeg") no-repeat 0% 0%;
+    background-size: cover;
+    font-family: "New Roman";
+  }
+
+div.overlay {
+    background-color:rgba(60, 68, 68, 0.8);
+    color:white;
+    font-weight: bold;
+  }
+  
+input  {
+      color: white;
+  }
+
+.overlay {
+  /* margin-top: 200px; */
+  justify-content: center;
+  align-items: center;
+}
