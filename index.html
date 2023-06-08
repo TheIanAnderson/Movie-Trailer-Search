@@ -13,8 +13,8 @@
     <div class="container">
 
         <div class="row"> 
-          <div class="col s3">
-            <h2 class="white-text">Movie Search</h2>
+          <div class="col s12">
+            <h2 class="white-text">Movie-Trailer-Search</h2>
           </div>
         </div> 
 
@@ -27,31 +27,64 @@
             <input type="text" id="movie">
           </div>
 
-          <div class="col l12 s12">
+          <div class="col l4 s12">
             <input class="btn-large" type="button" id="search-button" value="Search" />
             <input class="btn-large" type="button" id="clear-button" value="Clear Results" />
+            <div class="row" id="lastSearch">
+              <div class="card" style="width: 18rem;" id="buttonsArray">
+                  <!-- Search Button holder -->
+              </div>
+          </div>
           </div>
         </div> 
 
         <div class="row"> 
-          <div class="col m4 offset-m0" id="details">
-            <h3>Movie Details:</h3>
-          </div>
+          <div class="col s12 m4">
+            <div class="card blue-grey lighten-4">
+               <div class="card-content blue-grey-text">
+                  <span class="card-title"><h3>Movie Awards</h3></span>
+                  <p class="awardsDesc"> </p>
+                  <ol class="awardsCard">
+                  </ol>
+               </div>
+               
+            </div>
+         </div>
+         <div class="col s12 m4">
+          <div class="card blue-grey lighten-4">
+             <div class="card-content blue-grey-text">
+                <span class="card-title"><h3>Cast</h3></span>
+                
+                <ol class="castsCard">
+                </ol>
+              
+                <!-- <p>HTML5 is the next major revision of the HTML standard superseding HTML 4.01, XHTML 1.0, and XHTML 1.1. HTML5 is a standard for structuring and presenting content on the World Wide Web.</p> -->
+             </div>
 
-          <div class="col m4 offset-m0" id="casts">
-            <h3>Casts</h3>
           </div>
-
-          <div class="col m4 offset-m0" id="trailer">
-            <h3>Trailer</h3>
+       </div>
+       <div class="col s12 m4">
+        <div class="card card-image blue-grey lighten-4">
+           <div class="card-content blue-grey-text">
+              <span class="card-title"><h3>Poster</h3></span>
+              <ol class="posterCard">
+              </ol>
           </div>
+        </div>
+      </div>
+    </div> 
+          <div class="col s12 m4">
+            <div class="card blue-grey lighten-4">
+               <div class="card-content blue-grey-text">
+                  <span class="card-title"><h3>Trailer</h3></span>
+                  <p>HTML5 is the next major revision of the HTML standard superseding HTML 4.01, XHTML 1.0, and XHTML 1.1. HTML5 is a standard for structuring and presenting content on the World Wide Web.</p>
+               </div>
+            </div>
         </div> 
-
-      </div> 
     </div> 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="assets/js/script.js"></script>
+    <script src="assets/js/script1.js"></script>
     <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
   </body>
 
