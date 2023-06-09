@@ -226,7 +226,7 @@ function searchVideos(event) {
     })
     .then(function(data) {
       console.log(data);
-      var resultsContainer = document.getElementById('results');
+      var resultsContainer = document.querySelector('.title');
       var videoItems = data.items.slice(0, 3)
 
       videoItems.forEach(function(video) {
@@ -235,22 +235,24 @@ function searchVideos(event) {
         var videoId = video.id.videoId
         var videoUrl =  `https://www.youtube.com/watch?v=${videoId}`
         var thumbnailUrl = video.snippet.thumbnails.default.url
-        var listItem = document.createElement('li');
+        var listItem = document.createElement('p');
         var link = document.createElement('a')
 
 
         link.href = videoUrl
         link.target = '_blank'
+        link.className = 'link'
+        link.appendChild(document.createTextNode(videoTitle))
         
 
         var thumbnail = document.createElement('img')
         thumbnail.src = thumbnailUrl
         thumbnail.alt = "Video Thumbnail"
+        thumbnail.className = 'thumbnail'
         thumbnail.width = 200
 
 
         link.appendChild(thumbnail)
-        link.appendChild(document.createTextNode(videoTitle));
         listItem.appendChild(link)
 
 
