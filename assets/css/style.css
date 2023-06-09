@@ -45,4 +45,9 @@ input  {
   display: flex;
   align-items: center;
   justify-content: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#movie-name {
+  text-align: center;
 }

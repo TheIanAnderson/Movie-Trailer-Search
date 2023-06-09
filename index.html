@@ -7,6 +7,7 @@
     <title>MovieSearch</title>
     <link rel="stylesheet" href="assets/css/style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   </head>
 
   <body>
@@ -23,18 +24,18 @@
         <div class="row">  
 
           <div class="greater-container col l12 s12">
-            <h5>Enter Movie Name:</h5>
+            <h5 id="movie-name">Enter Movie Name:</h5>
             <input type="text" id="movie">
           </div>
 
           <div class="button-container col l4 s12">
-            <input class="btn-large btn-group " type="button" id="search-button" value="Search" />
+            <a class="btn-large btn-group " type="button" id="search-button"><i class="material-icons left">movie</i>Search</a>
           </div>
           <div class="button-container col l4 s12">
-            <input class="btn-large btn-group " type="button" id="clear-button" value="Clear Results" />
+            <a class="btn-large btn-group " type="button" id="clear-button"><i class="material-icons left">backspace</i>Clear Results</a>
           </div>
           <div class="button-container col l4 s12">
-            <input class="btn-large btn-group " type="button" id="last-search-button" value="Last Search" />
+            <a class="btn-large btn-group " type="button" id="last-search-button"><i class="material-icons left">replay</i>Last Search</a>
           </div>
             <div class="row" id="lastSearch">
               <div class="card" style="width: 18rem;" id="buttonsArray">
