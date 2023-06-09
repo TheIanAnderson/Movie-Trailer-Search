@@ -153,20 +153,20 @@ function moviePoster(userInput) {
     let moviePosterURL =
       "https://imdb-api.com/en/API/Posters/" + API_KEY + "/" + movieId;
     // This is the API call to imdb posters
-    $.ajax({
-      url: moviePosterURL,
-      method: "GET",
-    }).then(function (res) {
-      console.log(res);
-      for (var i = 0; i < 2; i++) {
-        // console.log("Posters" + i + ":" + res.posters[i].link);
-        var newImg = $("<img>")
-          .attr("class", "card-image")
-          .attr("src", res.posters[i].link);
-        $(".card-image").append(newImg);
-      }
-    });
-  });
+        $.ajax({
+        url: moviePosterURL,
+        method: "GET"
+        }).then(function (res) {
+        console.log(res); 
+        $('.card-image').html("");
+        for (var i = 0; i < 2; i++) {
+            // console.log("Posters" + i + ":" + res.posters[i].link);
+            var newImg = $("<img>").attr("class", "card-image").attr("src", res.posters[i].link);
+        $('.card-image').append(newImg);
+        }
+        });    
+    });  
+
 }
 
 function movieAwards(userInput) {
@@ -186,24 +186,33 @@ function movieAwards(userInput) {
     let movieCastsURL =
       "https://imdb-api.com/en/API/Awards/" + API_KEY + "/" + movieId;
     // This is the API call to imdb cast
-    $.ajax({
-      url: movieCastsURL,
-      method: "GET",
-    }).then(function (res) {
-      console.log(res);
-      console.log(res.description);
-      console.log(res.items);
-      //   $('.awardsDesc').textcontent = res.description;
-      for (var i = 0; i < 10; i++) {
-        // console.log("actor" + i + ":" + res.actors[i].name);
-        var listItem = document.createElement("li");
-        var details = document.createTextNode(res.items[i].eventTitle);
-        listItem.appendChild(details);
-        awardView.appendChild(listItem);
-      }
-    });
-  });
-}
+        $.ajax({
+        url: movieCastsURL,
+        method: "GET"
+        }).then(function (res) {
+        console.log(res); 
+        console.log(res.description); 
+        console.log(res.items); 
+        //   $('.awardsDesc').textcontent = res.description;
+        for (var i = 0; i < 5; i++) {
+            // console.log("actor" + i + ":" + res.actors[i].name);
+            var listItem = document.createElement("li"); 
+            var details = document.createTextNode(res.items[i].eventTitle)
+            listItem.appendChild(details);
+            awardView.appendChild(listItem);
+        }
+        });  
+    });  
+    }
+
+$("#clear-button").on("click", function(){
+    $('.castsCard').empty();
+    $('.awardsCard').empty();
+    $('.posterCard').empty();
+    location.reload();
+    })
+      
+
 
 $("#clear-button").on("click", function () {
   $(".castsCard").empty();
