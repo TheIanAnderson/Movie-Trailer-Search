@@ -8,6 +8,10 @@ var API_KEY = "k_3rwfrpt2"
 var castsView = document.querySelector(".castsCard");
 var awardView = document.querySelector(".awardsCard");
 
+var YOUTUBE_API_KEY = "AIzaSyCVhc2HYUCAa6IUoFoaGwbP7C72QinwRiY";
+var search_terms = "Jack Welch";
+var submit = document.getElementById('search-button')
+
 $(document).ready(function (){
     var userInput = movieArray[movieArray.length - 1];
     // $window.sessionStorage.clear();
@@ -203,16 +207,13 @@ $("#clear-button").on("click", function(){
       
 
 });
-var YOUTUBE_API_KEY = "AIzaSyCVhc2HYUCAa6IUoFoaGwbP7C72QinwRiY";
-var search_terms = "Jack Welch";
-var submit = document.getElementById('submit')
-var userContainer = document.getElementById('users');
+
 
 document.addEventListener('DOMContentLoaded', function() {
     submit.addEventListener('click', searchVideos);
 function searchVideos(event) {
   event.preventDefault()
-  var searchQuery = document.getElementById('searchInput').value;
+  var searchQuery = document.getElementById('movie').value;
   var apiKey = "AIzaSyCVhc2HYUCAa6IUoFoaGwbP7C72QinwRiY";
   var keyword = 'movie'
   var requestUrl = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&part=snippet&maxResults=20&q=${searchQuery}+${keyword}`;
@@ -226,7 +227,6 @@ function searchVideos(event) {
     .then(function(data) {
       console.log(data);
       var resultsContainer = document.getElementById('results');
-      resultsContainer.innerHTML = "";
       var videoItems = data.items.slice(0, 3)
 
       videoItems.forEach(function(video) {
