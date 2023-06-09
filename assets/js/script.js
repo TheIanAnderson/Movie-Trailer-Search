@@ -150,6 +150,7 @@ function moviePoster(userInput){
         method: "GET"
         }).then(function (res) {
         console.log(res); 
+        $('.card-image').html("");
         for (var i = 0; i < 2; i++) {
             // console.log("Posters" + i + ":" + res.posters[i].link);
             var newImg = $("<img>").attr("class", "card-image").attr("src", res.posters[i].link);
@@ -182,7 +183,7 @@ function movieAwards(userInput) {
         console.log(res.description); 
         console.log(res.items); 
         //   $('.awardsDesc').textcontent = res.description;
-        for (var i = 0; i < 10; i++) {
+        for (var i = 0; i < 5; i++) {
             // console.log("actor" + i + ":" + res.actors[i].name);
             var listItem = document.createElement("li"); 
             var details = document.createTextNode(res.items[i].eventTitle)
