@@ -84,7 +84,7 @@ function movieTitleSearch(userInput) {
   // This is the API call from imdb Movie ID
   $.ajax({
     url: movieURL,
-    method: "GET"
+    method: "GET",
   }).then(function (res) {
     console.log(res);
     console.log(res.results[0]); 
