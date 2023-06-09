@@ -26,3 +26,23 @@ input  {
   height: auto;
   object-fit: cover;
 }
+
+.btn-group {
+  /* position: relative; */
+  display: -ms-inline-flexbox;
+  display: flex;
+  vertical-align: middle;
+  justify-content: center;
+}
+
+.greater-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
