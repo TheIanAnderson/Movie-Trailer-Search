@@ -29,7 +29,7 @@ input  {
 
 .btn-group {
   /* position: relative; */
-  display: -ms-inline-flexbox;
+  /* display: -ms-inline-flexbox; */
   display: flex;
   vertical-align: middle;
   justify-content: center;
@@ -46,8 +46,29 @@ input  {
   align-items: center;
   justify-content: center;
   font-family: Arial, Helvetica, sans-serif;
+  margin: 10px ;
+  margin-bottom: 20px
 }
 
 #movie-name {
   text-align: center;
+}
+
+.card{
+    overflow: visible;
+}
+
+.carousel-item img {
+  max-width: 100px;
+  max-height: 100px;
+}
+
+.tabs-content.carousel .carousel-item { height: 100%; }
+
+.carousel .carousel-item {
+  display: none;
+}
+
+.carousel .carousel-item.active {
+  display: block;
 }
