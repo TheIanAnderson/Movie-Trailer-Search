@@ -45,6 +45,7 @@ $(document).ready(function () {
     // }
     $(".savedBtn").on("click", function (event) {
       event.preventDefault();
+
       var userInput = $(this).data("name");
       console.log(userInput);
       // currentWeather(userInput);
