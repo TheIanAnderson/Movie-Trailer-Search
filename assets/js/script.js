@@ -139,15 +139,9 @@ function moviePoster(userInput) {
           href:'#'+ (i+1) +"!",
           class:'carousel-item'
         }).appendTo($('.carousel')));
+        $('.carousel-item').first().addClass('active');
       }
       $('.carousel').carousel();
-      var carousel = $(".carousel");
-
-// Initialize the carousel
-M.Carousel.init(carousel);
-M.Carousel.init()
-
-      
     });
   });
 }
@@ -207,7 +201,7 @@ function searchVideos(movieTitle) {
     url: requestUrl,
     method: "GET",
   }).then(function (data) {
-    console.log(data);
+    // console.log(data);
     var videoItems = data.items.slice(0, 3);
     videoItems.forEach(function (video) {
       var videoTitle = video.snippet.title;
