@@ -18,4 +18,9 @@
 
 
 ## Contributors
+
+* https://github.com/TheIanAnderson
+* https://github.com/MrMcEvans
+* https://github.com/cbailey73
+* https://github.com/rgadewar
 * 

@@ -1,4 +1,3 @@
-// var movieArray = JSON.parse(localStorage.getItem("Last Search")) || [];
 // var buttonArray = $("#buttonsArray");
 // var API_KEY = "k_y05611tl";
 // var API_KEY = "k_4uiv33vj"
@@ -7,32 +6,19 @@ var castsView = document.querySelector(".castsCard");
 var awardView = document.querySelector(".awardsCard");
 var trailerView = document.querySelector(".card-trailer");
 var rowCards = $("#demo-carousel");
-
 var YOUTUBE_API_KEY = "AIzaSyCVhc2HYUCAa6IUoFoaGwbP7C72QinwRiY";
 var submit = document.getElementById('search-button');
-
-
+var last_Search = JSON.parse(localStorage.getItem("Last Search"));
 
 $(document).ready(function () {
-  // var last_Search = JSON.parse(localStorage.getItem("Last Search"));
-  // var movieTitle = last_Search.Title;
-  // $('.carousel.carousel-slider').carousel({
-  //   fullWidth: true
-  //   });
-  // $('#demo-carousel').carousel({fullWidth: true});
-  // movieCastSearch(movieTitle);
-  // moviePoster(movieTitle);
-  // movieAwards(movieTitle);
-  // searchVideos(movieTitle);
 
   $("#last-search-button").on("click", function (event) {
     event.preventDefault();
-    // var last_Search = JSON.parse(localStorage.getItem("Last Search"));
     var movieTitle = last_Search.Title;
-    console.log(movieTitle);
     movieCastSearch(movieTitle);
     moviePoster(movieTitle);
-    // movieAwards(movieTitle);
+    movieAwards(movieTitle);
+    movieRatings(movieTitle);
     searchVideos(movieTitle);
   });
 
@@ -43,10 +29,10 @@ $(document).ready(function () {
     } else {
       var userInput = $("#movie").val().trim().toLowerCase();
       movieTitleSearch(userInput);
-      // storeData();
       movieCastSearch(userInput);
       moviePoster(userInput);
       movieAwards(userInput);
+      movieRatings(userInput);
       searchVideos(userInput);
       $("#movie").val("");
     }
@@ -77,7 +63,6 @@ $(document).ready(function () {
 });
 
 function movieCastSearch(userInput) {
-  // event.preventDefault();
   let movieURL =
     "https://imdb-api.com/en/API/SearchMovie/" + API_KEY + "/" + userInput;
   // This is the API call from imdb Movie ID
@@ -119,8 +104,6 @@ function moviePoster(userInput) {
     url: movieURL,
     method: "GET",
   }).then(function (res) {
-    // console.log(res);
-    // console.log(res.results[0]);
     // console.log("id " + res.results[0].id);
     var movieId = res.results[0].id;
     let moviePosterURL =
@@ -133,21 +116,14 @@ function moviePoster(userInput) {
       // console.log(res);
       $(".card-image").html("");
       var numOfPosters = Math.min(1, res.posters.length);
+      if(res.posters){
       for (var i = 0; i < numOfPosters; i++) {
         var newImg = $("<img>")
           .attr("class", "card-image")
           .attr("src", res.posters[i].link);
         $(".card-image").append(newImg);
-        console.log("In images")
-        $('<img />').attr({
-          src:res.posters[i].link
-        }).appendTo($('<a />').attr({
-          href:'#'+ (i+1) +"!",
-          class:'carousel-item'
-        }).appendTo($('.carousel')));
-        $('.carousel-item').first().addClass('active');
       }
-      $('.carousel').carousel();
+      }
     });
   });
 }
@@ -172,21 +148,44 @@ function movieAwards(userInput) {
       url: movieCastsURL,
       method: "GET",
     }).then(function (res) {
-      // console.log(res);
-      // console.log(res.description);
-      // console.log(res.items);
-      $(".awardsDesc").text(res.description);
-      // $('.awardsDesc').html('<em>' + text(res.description) + '</em>')
-      for (var i = 0; i < 2; i++) {
-        // console.log("actor" + i + ":" + res.actors[i].name);
+      console.log(res);
+      console.log(res.description);
+      console.log(res.items);
+      $(".awardsDesc").text("Awards: " + res.description).css("font-weight","Bold").css("fontSize", "20px");
+      if(res.items){
+      for (var i = 0; i < 5; i++) {
         var listItem = document.createElement("li");
         var details = document.createTextNode(res.items[i].eventTitle);
         listItem.appendChild(details);
-        awardView.appendChild(listItem);
-        
+        awardView.appendChild(listItem);  
       }
-      var elems2 = document.querySelectorAll('.carousel');
-      var instances2 = M.Carousel.init(elems2);
+    }
+    });
+  });
+}
+
+function movieRatings(userInput) {
+  $(".awardsCard").empty();
+  let movieURL =
+    "https://imdb-api.com/en/API/SearchMovie/" + API_KEY + "/" + userInput;
+  // This is the API call from imdb Movie ID
+  $.ajax({
+    url: movieURL,
+    method: "GET",
+  }).then(function (res) {
+    console.log(res);
+    var movieId = res.results[0].id;
+    let movieRatingsURL =
+      "https://imdb-api.com/en/API/Ratings/" + API_KEY + "/" + movieId;
+    // This is the API call to imdb cast
+    $.ajax({
+      url: movieRatingsURL,
+      method: "GET",
+    }).then(function (res) {
+      console.log(res);
+      console.log(res.imDb);
+      // $(".movieRatings").text("Ratings");
+      $(".movieRatings").text("Ratings: " + res.imDb).css("font-weight","Bold").css("fontSize", "20px");
     });
   });
 }
