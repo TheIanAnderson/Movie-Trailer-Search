@@ -9,7 +9,7 @@ var trailerView = document.querySelector(".card-trailer");
 var rowCards = $("#demo-carousel");
 var YOUTUBE_API_KEY = "AIzaSyCVhc2HYUCAa6IUoFoaGwbP7C72QinwRiY";
 var submit = document.getElementById('search-button')
-var last_Search = JSON.parse(localStorage.getItem("Last Search")) || [];
+
 
 $(document).ready(function () {
   var movieTitle = last_Search.Title;
@@ -240,7 +240,7 @@ document.addEventListener('DOMContentLoaded', function() {
 function searchVideos(event) {
 event.preventDefault()
 var searchQuery = document.getElementById('movie').value;
-var apiKey = "AIzaSyCVhc2HYUCAa6IUoFoaGwbP7C72QinwRiY";
+var apiKey = "AIzaSyADZUckXGxWF2br2X7u0XbiPyzbPzdvb0Q";
 var keyword = 'movie'
 var requestUrl = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&part=snippet&maxResults=20&q=${searchQuery}+${keyword}`;
 
