@@ -13,31 +13,6 @@ var submit = document.getElementById('search-button')
 
 
 $(document).ready(function () {
-  var userInput = movieArray[movieArray.length - 1];
-  // $window.sessionStorage.clear();
-  // $('.castsCard1').empty();
-  // currentWeather(userInput);
-  // forecast(userInput);
-  // lastSearch ();
-
-  function storeData(userInput) {
-    var userInput = $("#movie").val().trim().toLowerCase();
-    var containsCity = false;
-
-    if (movieArray != null) {
-      $(movieArray).each(function (x) {
-        if (movieArray[x] === userInput) {
-          containsCity = true;
-        }
-      });
-    }
-
-    if (containsCity === false) {
-      movieArray.push(userInput);
-    }
-
-
-$(document).ready(function () {
   var movieTitle = last_Search.Title;
   $('.carousel.carousel-slider').carousel({
     fullWidth: true
@@ -255,74 +230,67 @@ function searchVideos(movieTitle) {
     $(".card-trailer").empty();
     location.reload();
   });
+
 }
 
-$("#clear-button").on("click", function () {
-  $(".castsCard").empty();
-  $(".awardsCard").empty();
-  $(".posterCard").empty();
-  location.reload();
-});
-
-
 document.addEventListener('DOMContentLoaded', function() {
-    submit.addEventListener('click', searchVideos);
+  submit.addEventListener('click', searchVideos);
 function searchVideos(event) {
-  event.preventDefault()
-  var searchQuery = document.getElementById('movie').value;
-  var apiKey = "AIzaSyCVhc2HYUCAa6IUoFoaGwbP7C72QinwRiY";
-  var keyword = 'movie'
-  var requestUrl = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&part=snippet&maxResults=20&q=${searchQuery}+${keyword}`;
-  
+event.preventDefault()
+var searchQuery = document.getElementById('movie').value;
+var apiKey = "AIzaSyCVhc2HYUCAa6IUoFoaGwbP7C72QinwRiY";
+var keyword = 'movie'
+var requestUrl = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&part=snippet&maxResults=20&q=${searchQuery}+${keyword}`;
 
 
-  fetch(requestUrl)
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(data) {
-      console.log(data);
-      var resultsContainer = document.querySelector('.title');
-      var videoItems = data.items.slice(0, 3)
 
-      videoItems.forEach(function(video) {
-        
-        var videoTitle = video.snippet.title;
-        var videoId = video.id.videoId
-        var videoUrl =  `https://www.youtube.com/watch?v=${videoId}`
-        var thumbnailUrl = video.snippet.thumbnails.default.url
-        var listItem = document.createElement('p');
-        var link = document.createElement('a')
+fetch(requestUrl)
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(data) {
+    console.log(data);
+    var resultsContainer = document.querySelector('.title');
+    var videoItems = data.items.slice(0, 3)
 
+    videoItems.forEach(function(video) {
 
-        link.href = videoUrl
-        link.target = '_blank'
-        link.className = 'link'
-        link.appendChild(document.createTextNode(videoTitle))
-        
-
-        var thumbnail = document.createElement('img')
-        thumbnail.src = thumbnailUrl
-        thumbnail.alt = "Video Thumbnail"
-        thumbnail.className = 'thumbnail'
-        thumbnail.width = 200
+      var videoTitle = video.snippet.title;
+      var videoId = video.id.videoId
+      var videoUrl =  `https://www.youtube.com/watch?v=${videoId}`
+      var thumbnailUrl = video.snippet.thumbnails.default.url
+      var listItem = document.createElement('p');
+      var link = document.createElement('a')
 
 
-        link.appendChild(thumbnail)
-        listItem.appendChild(link)
+      link.href = videoUrl
+      link.target = '_blank'
+      link.className = 'link'
+      link.appendChild(document.createTextNode(videoTitle))
 
 
-        // var title = document.createElement('p')
-        // title.textContent = videoTitle
-        // listItem.appendChild(title)
-        resultsContainer.appendChild(listItem);
-        // console.log(video)
+      var thumbnail = document.createElement('img')
+      thumbnail.src = thumbnailUrl
+      thumbnail.alt = "Video Thumbnail"
+      thumbnail.className = 'thumbnail'
+      thumbnail.width = 200
 
 
-      });
-    })
-    .catch(function(error) {
-      console.error(error);
+      link.appendChild(thumbnail)
+      listItem.appendChild(link)
+
+
+      // var title = document.createElement('p')
+      // title.textContent = videoTitle
+      // listItem.appendChild(title)
+      resultsContainer.appendChild(listItem);
+      // console.log(video)
+
+
     });
+  })
+  .catch(function(error) {
+    console.error(error);
+  });
 }
 })
