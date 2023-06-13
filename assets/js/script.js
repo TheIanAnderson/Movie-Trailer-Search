@@ -230,7 +230,7 @@ function movieAwards(userInput) {
     $(".castsCard").empty();
     $(".awardsCard").empty();
     $(".posterCard").empty();
-    $(".card-trailer").empty();
+    $(".card-content-trailer").empty();
     location.reload();
   });
 
