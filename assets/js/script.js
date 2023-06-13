@@ -10,10 +10,11 @@ var rowCards = $("#demo-carousel");
 
 var YOUTUBE_API_KEY = "AIzaSyCVhc2HYUCAa6IUoFoaGwbP7C72QinwRiY";
 var submit = document.getElementById('search-button');
-var last_Search = JSON.parse(localStorage.getItem("Last Search")) || [];
+
 
 
 $(document).ready(function () {
+  var last_Search = JSON.parse(localStorage.getItem("Last Search"));
   var movieTitle = last_Search.Title;
   $('.carousel.carousel-slider').carousel({
     fullWidth: true
@@ -26,6 +27,7 @@ $(document).ready(function () {
 
   $("#last-search-button").on("click", function (event) {
     event.preventDefault();
+    var last_Search = JSON.parse(localStorage.getItem("Last Search"));
     var movieTitle = last_Search.Title;
     console.log(movieTitle);
     movieCastSearch(movieTitle);
