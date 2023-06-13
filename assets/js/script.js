@@ -7,16 +7,13 @@ var castsView = document.querySelector(".castsCard");
 var awardView = document.querySelector(".awardsCard");
 var trailerView = document.querySelector(".card-trailer");
 var rowCards = $("#demo-carousel");
-
 var YOUTUBE_API_KEY = "AIzaSyCVhc2HYUCAa6IUoFoaGwbP7C72QinwRiY";
 var submit = document.getElementById('search-button')
-
+var last_Search = JSON.parse(localStorage.getItem("Last Search")) || [];
 
 $(document).ready(function () {
   var movieTitle = last_Search.Title;
-  $('.carousel.carousel-slider').carousel({
-    fullWidth: true
-    });
+  
   // $('#demo-carousel').carousel({fullWidth: true});
   // movieCastSearch(movieTitle);
   // moviePoster(movieTitle);
@@ -44,7 +41,7 @@ $(document).ready(function () {
       movieCastSearch(userInput);
       moviePoster(userInput);
       movieAwards(userInput);
-      searchVideos(userInput);
+      // searchVideos(userInput);
       $("#movie").val("");
     }
   });
@@ -141,9 +138,15 @@ function moviePoster(userInput) {
           href:'#'+ (i+1) +"!",
           class:'carousel-item'
         }).appendTo($('.carousel')));
-        $('.carousel-item').first().addClass('active');
       }
       $('.carousel').carousel();
+      var carousel = $(".carousel");
+
+// Initialize the carousel
+M.Carousel.init(carousel);
+M.Carousel.init()
+
+      
     });
   });
 }
@@ -187,42 +190,42 @@ function movieAwards(userInput) {
   });
 }
 
-function searchVideos(movieTitle) {
-  $(".card-trailer").empty();
-  var searchQuery = $("#movie").val();
-  var apiKey = "AIzaSyCVhc2HYUCAa6IUoFoaGwbP7C72QinwRiY";
-  var keyword = "trailer";
-  var requestUrl;
-  if (searchQuery) {
-    requestUrl = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&part=snippet&maxResults=20&q=${searchQuery}+${keyword}`;
-  } else {
-    requestUrl = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&part=snippet&maxResults=20&q=${movieTitle}+${keyword}`;
-  }
-  $.ajax({
-    url: requestUrl,
-    method: "GET",
-  }).then(function (data) {
-    // console.log(data);
-    var videoItems = data.items.slice(0, 3);
-    videoItems.forEach(function (video) {
-      var videoTitle = video.snippet.title;
-      var videoId = video.id.videoId;
-      var videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
-      var thumbnailUrl = video.snippet.thumbnails.default.url;
-      var listItem = document.createElement("li");
-      var link = document.createElement("a");
-      link.href = videoUrl;
-      link.target = "_blank";
-      var thumbnail = document.createElement("img");
-      thumbnail.src = thumbnailUrl;
-      thumbnail.alt = "Video Thumbnail";
-      thumbnail.width = 200;
-      link.appendChild(thumbnail);
-      link.appendChild(document.createTextNode(videoTitle));
-      listItem.appendChild(link);
-      trailerView.appendChild(listItem);
-    });
-  });
+// function searchVideos(movieTitle) {
+//   $(".card-trailer").empty();
+//   var searchQuery = $("#movie").val();
+//   var apiKey = "AIzaSyCVhc2HYUCAa6IUoFoaGwbP7C72QinwRiY";
+//   var keyword = "trailer";
+//   var requestUrl;
+//   if (searchQuery) {
+//     requestUrl = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&part=snippet&maxResults=20&q=${searchQuery}+${keyword}`;
+//   } else {
+//     requestUrl = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&part=snippet&maxResults=20&q=${movieTitle}+${keyword}`;
+//   }
+//   $.ajax({
+//     url: requestUrl,
+//     method: "GET",
+//   }).then(function (data) {
+//     console.log(data);
+//     var videoItems = data.items.slice(0, 3);
+//     videoItems.forEach(function (video) {
+//       var videoTitle = video.snippet.title;
+//       var videoId = video.id.videoId;
+//       var videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
+//       var thumbnailUrl = video.snippet.thumbnails.default.url;
+//       var listItem = document.createElement("li");
+//       var link = document.createElement("a");
+//       link.href = videoUrl;
+//       link.target = "_blank";
+//       var thumbnail = document.createElement("img");
+//       thumbnail.src = thumbnailUrl;
+//       thumbnail.alt = "Video Thumbnail";
+//       thumbnail.width = 200;
+//       link.appendChild(thumbnail);
+//       link.appendChild(document.createTextNode(videoTitle));
+//       listItem.appendChild(link);
+//       trailerView.appendChild(listItem);
+//     });
+//   });
   $("#clear-button").on("click", function () {
     $(".castsCard").empty();
     $(".awardsCard").empty();
@@ -231,7 +234,6 @@ function searchVideos(movieTitle) {
     location.reload();
   });
 
-}
 
 document.addEventListener('DOMContentLoaded', function() {
   submit.addEventListener('click', searchVideos);
