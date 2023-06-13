@@ -3,6 +3,11 @@ body {
     font-family: "New Roman";
   }
 
+h2 {
+  color: white;
+  font-weight: bolder;
+}
+
 div.overlay {
     background-color:rgba(60, 68, 68, 0.8);
     color:white;
@@ -38,6 +43,7 @@ input  {
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color:rgba(242, 230, 230, 0.792);
 }
 
 .button-container {
@@ -46,7 +52,7 @@ input  {
   justify-content: center;
   font-family: Arial, Helvetica, sans-serif;
   margin: 10px ;
-  margin-bottom: 20px
+  margin-bottom: 20px;
 }
 
 #movie-name {
