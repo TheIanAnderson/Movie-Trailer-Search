@@ -132,7 +132,8 @@ function moviePoster(userInput) {
     }).then(function (res) {
       // console.log(res);
       $(".card-image").html("");
-      for (var i = 0; i < 5; i++) {
+      var numOfPosters = Math.min(1, res.posters.length);
+      for (var i = 0; i < numOfPosters; i++) {
         var newImg = $("<img>")
           .attr("class", "card-image")
           .attr("src", res.posters[i].link);
@@ -191,64 +192,37 @@ function movieAwards(userInput) {
 }
 
 
-function searchVideos(event) {
-  event.preventDefault()
-  var searchQuery = document.getElementById('movie').value;
-  var apiKey = "AIzaSyADZUckXGxWF2br2X7u0XbiPyzbPzdvb0Q";
-  var keyword = 'movie'
-  var requestUrl = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&part=snippet&maxResults=20&q=${searchQuery}+${keyword}`;
-  
-  
-  
-  fetch(requestUrl)
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(data) {
-      console.log(data);
-      var resultsContainer = document.querySelector('.title');
-      var videoItems = data.items.slice(0, 3)
-  
-      videoItems.forEach(function(video) {
-  
-        var videoTitle = video.snippet.title;
-        var videoId = video.id.videoId
-        var videoUrl =  `https://www.youtube.com/watch?v=${videoId}`
-        var thumbnailUrl = video.snippet.thumbnails.default.url
-        var listItem = document.createElement('p');
-        var link = document.createElement('a')
-  
-  
-        link.href = videoUrl
-        link.target = '_blank'
-        link.className = 'link'
-        link.appendChild(document.createTextNode(videoTitle))
-  
-  
-        var thumbnail = document.createElement('img')
-        thumbnail.src = thumbnailUrl
-        thumbnail.alt = "Video Thumbnail"
-        thumbnail.className = 'thumbnail'
-        thumbnail.width = 200
-  
-  
-        link.appendChild(thumbnail)
-        listItem.appendChild(link)
-  
-  
-        // var title = document.createElement('p')
-        // title.textContent = videoTitle
-        // listItem.appendChild(title)
-        resultsContainer.appendChild(listItem);
-        // console.log(video)
-  
-  
+  function searchVideos(movieTitle) {
+    $(".card-content-trailer").empty();
+    var searchQuery = $("#movie").val();
+    var apiKey = "AIzaSyADZUckXGxWF2br2X7u0XbiPyzbPzdvb0Q";
+    var keyword = "movie";
+    var requestUrl;
+    if (searchQuery) {
+      requestUrl = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&part=snippet&maxResults=20&q=${searchQuery}+${keyword}`;
+    } else {
+      requestUrl = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&part=snippet&maxResults=20&q=${movieTitle}+${keyword}`;
+    }
+    $.ajax({
+      url: requestUrl,
+      method: "GET",
+    }).then(function (data) {
+      var videoItems = data.items.slice(0, 3);
+      videoItems.forEach(function (video) {
+        var videoId = video.id.videoId;
+        var videoUrl = `https://www.youtube.com/embed/${videoId}`;
+        var iframe = $("<iframe>")
+          .attr("width", "315")
+          .attr("height", "200")
+          .attr("src", videoUrl)
+          .attr("frameborder", "0")
+          .attr("allowfullscreen", true);
+        var listItem = $("<li>").append(iframe);
+        $(".card-content-trailer").append(listItem);
       });
-    })
-    .catch(function(error) {
-      console.error(error);
     });
   }
+
 
   submit.addEventListener('click', searchVideos);
 
