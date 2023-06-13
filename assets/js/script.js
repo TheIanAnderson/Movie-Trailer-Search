@@ -1,12 +1,10 @@
-// var movieArray = JSON.parse(localStorage.getItem("Last Search")) || [];
-// var buttonArray = $("#buttonsArray");
+var movieArray = JSON.parse(localStorage.getItem("Saved Movie")) || [];
+var buttonArray = $("#buttonsArray");
 // var API_KEY = "k_y05611tl";
 // var API_KEY = "k_4uiv33vj"
 var API_KEY = "k_3rwfrpt2";
 var castsView = document.querySelector(".castsCard");
 var awardView = document.querySelector(".awardsCard");
-var trailerView = document.querySelector(".card-trailer");
-var rowCards = $("#demo-carousel");
 
 var YOUTUBE_API_KEY = "AIzaSyCVhc2HYUCAa6IUoFoaGwbP7C72QinwRiY";
 var submit = document.getElementById('search-button')
@@ -36,40 +34,45 @@ $(document).ready(function () {
       movieArray.push(userInput);
     }
 
+    sessionStorage.setItem("Saved Movie", JSON.stringify(movieArray));
+  }
 
-$(document).ready(function () {
-  var movieTitle = last_Search.Title;
-  $('.carousel.carousel-slider').carousel({
-    fullWidth: true
+  function lastSearch() {
+    buttonArray.empty();
+    // for (var i = 0; i < movieArray.length; i ++) {
+    var newButton = $("<button>")
+      .attr("type", "button")
+      .attr("class", "savedBtn btn btn-secondary btn-lg btn-block");
+    newButton.attr("data-name", movieArray[movieArray.length - 1]);
+    newButton.text(movieArray[movieArray.length - 1]);
+    buttonArray.prepend(newButton);
+    // }
+    $(".savedBtn").on("click", function (event) {
+      event.preventDefault();
+      var userInput = $(this).data("name");
+      console.log(userInput);
+      // currentWeather(userInput);
+      // forecast(userInput);
     });
-  // $('#demo-carousel').carousel({fullWidth: true});
-  // movieCastSearch(movieTitle);
-  // moviePoster(movieTitle);
-  // movieAwards(movieTitle);
-  // searchVideos(movieTitle);
-
-  $("#last-search-button").on("click", function (event) {
-    event.preventDefault();
-    var movieTitle = last_Search.Title;
-    console.log(movieTitle);
-    movieCastSearch(movieTitle);
-    moviePoster(movieTitle);
-    // movieAwards(movieTitle);
-    searchVideos(movieTitle);
-  });
+  }
 
   $("#search-button").on("click", function (event) {
     event.preventDefault();
     if ($("#movie").val() === "") {
+      // alert("Eneter movie name")
       return;
     } else {
+      $(".castsCard").empty();
+      $(".awardsCard").empty();
+      $(".posterCard").empty();
       var userInput = $("#movie").val().trim().toLowerCase();
       movieTitleSearch(userInput);
       // storeData();
       movieCastSearch(userInput);
       moviePoster(userInput);
       movieAwards(userInput);
-      searchVideos(userInput);
+      // storeData();
+      // lastSearch();
       $("#movie").val("");
     }
   });
@@ -83,23 +86,26 @@ $(document).ready(function () {
       method: "GET",
     }).then(function (res) {
       console.log(res);
-      //   console.log(res.results[0]);
+      console.log(res.results[0]);
       // console.log("id " + res.results[0].id);
       var id = res.results[0].id;
+      // Save movie id in session storage
+      sessionStorage.setItem("MovieId", JSON.stringify(id));
       var expression = res.results[0].expression;
-      // Save movie id and title in local storage
+      // Save movie id in session storage
+      console.log(id);
+      console.log(res.expression);
       var searchInfo = {
         Title: res.expression,
         MovieID: id,
       };
       localStorage.setItem("Last Search", JSON.stringify(searchInfo));
-      localStorage.setItem("Movie", JSON.stringify(expression));
     });
   }
 });
 
 function movieCastSearch(userInput) {
-  // event.preventDefault();
+  event.preventDefault();
   let movieURL =
     "https://imdb-api.com/en/API/SearchMovie/" + API_KEY + "/" + userInput;
   // This is the API call from imdb Movie ID
@@ -107,14 +113,14 @@ function movieCastSearch(userInput) {
     url: movieURL,
     method: "GET",
   }).then(function (res) {
-    // console.log(res);
-    // console.log(res.results[0]);
+    console.log(res);
+    console.log(res.results[0]);
     // console.log("id " + res.results[0].id);
     var movieId = res.results[0].id;
     $(".castsCard").empty();
     let movieCastsURL =
       "https://imdb-api.com/en/API/FullCast/" + API_KEY + "/" + movieId;
-    // console.log("ID" + movieId);
+    console.log("ID" + movieId);
     // This is the API call to imdb cast
     $.ajax({
       url: movieCastsURL,
@@ -134,6 +140,7 @@ function movieCastSearch(userInput) {
 
 function moviePoster(userInput) {
   $(".posterCard").empty();
+  event.preventDefault();
   let movieURL =
     "https://imdb-api.com/en/API/SearchMovie/" + API_KEY + "/" + userInput;
   // This is the API call from imdb Movie ID
@@ -141,40 +148,34 @@ function moviePoster(userInput) {
     url: movieURL,
     method: "GET",
   }).then(function (res) {
-    // console.log(res);
-    // console.log(res.results[0]);
+    console.log(res);
+    console.log(res.results[0]);
     // console.log("id " + res.results[0].id);
     var movieId = res.results[0].id;
+    // $('.posterCard').empty();
+    // $('.posterCard').empty();
     let moviePosterURL =
       "https://imdb-api.com/en/API/Posters/" + API_KEY + "/" + movieId;
     // This is the API call to imdb posters
-    $.ajax({
-      url: moviePosterURL,
-      method: "GET",
-    }).then(function (res) {
-      // console.log(res);
-      $(".card-image").html("");
-      for (var i = 0; i < 5; i++) {
-        var newImg = $("<img>")
-          .attr("class", "card-image")
-          .attr("src", res.posters[i].link);
-        $(".card-image").append(newImg);
-        console.log("In images")
-        $('<img />').attr({
-          src:res.posters[i].link
-        }).appendTo($('<a />').attr({
-          href:'#'+ (i+1) +"!",
-          class:'carousel-item'
-        }).appendTo($('.carousel')));
-        $('.carousel-item').first().addClass('active');
-      }
-      $('.carousel').carousel();
-    });
-  });
+        $.ajax({
+        url: moviePosterURL,
+        method: "GET"
+        }).then(function (res) {
+        console.log(res); 
+        $('.card-image').html("");
+        for (var i = 0; i < 2; i++) {
+            // console.log("Posters" + i + ":" + res.posters[i].link);
+            var newImg = $("<img>").attr("class", "card-image").attr("src", res.posters[i].link);
+        $('.card-image').append(newImg);
+        }
+        });    
+    });  
+
 }
 
 function movieAwards(userInput) {
   $(".awardsCard").empty();
+  event.preventDefault();
   let movieURL =
     "https://imdb-api.com/en/API/SearchMovie/" + API_KEY + "/" + userInput;
   // This is the API call from imdb Movie ID
@@ -182,80 +183,40 @@ function movieAwards(userInput) {
     url: movieURL,
     method: "GET",
   }).then(function (res) {
-    // console.log(res);
-    // console.log(res.results[0]);
+    console.log(res);
+    console.log(res.results[0]);
     // console.log("id " + res.results[0].id);
     var movieId = res.results[0].id;
     let movieCastsURL =
       "https://imdb-api.com/en/API/Awards/" + API_KEY + "/" + movieId;
     // This is the API call to imdb cast
-    $.ajax({
-      url: movieCastsURL,
-      method: "GET",
-    }).then(function (res) {
-      // console.log(res);
-      // console.log(res.description);
-      // console.log(res.items);
-      $(".awardsDesc").text(res.description);
-      // $('.awardsDesc').html('<em>' + text(res.description) + '</em>')
-      for (var i = 0; i < 2; i++) {
-        // console.log("actor" + i + ":" + res.actors[i].name);
-        var listItem = document.createElement("li");
-        var details = document.createTextNode(res.items[i].eventTitle);
-        listItem.appendChild(details);
-        awardView.appendChild(listItem);
-        
-      }
-      var elems2 = document.querySelectorAll('.carousel');
-      var instances2 = M.Carousel.init(elems2);
-    });
-  });
-}
+        $.ajax({
+        url: movieCastsURL,
+        method: "GET"
+        }).then(function (res) {
+        console.log(res); 
+        console.log(res.description); 
+        console.log(res.items); 
+        //   $('.awardsDesc').textcontent = res.description;
+        for (var i = 0; i < 5; i++) {
+            // console.log("actor" + i + ":" + res.actors[i].name);
+            var listItem = document.createElement("li"); 
+            var details = document.createTextNode(res.items[i].eventTitle)
+            listItem.appendChild(details);
+            awardView.appendChild(listItem);
+        }
+        });  
+    });  
+    }
 
-function searchVideos(movieTitle) {
-  $(".card-trailer").empty();
-  var searchQuery = $("#movie").val();
-  var apiKey = "AIzaSyCVhc2HYUCAa6IUoFoaGwbP7C72QinwRiY";
-  var keyword = "trailer";
-  var requestUrl;
-  if (searchQuery) {
-    requestUrl = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&part=snippet&maxResults=20&q=${searchQuery}+${keyword}`;
-  } else {
-    requestUrl = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&part=snippet&maxResults=20&q=${movieTitle}+${keyword}`;
-  }
-  $.ajax({
-    url: requestUrl,
-    method: "GET",
-  }).then(function (data) {
-    // console.log(data);
-    var videoItems = data.items.slice(0, 3);
-    videoItems.forEach(function (video) {
-      var videoTitle = video.snippet.title;
-      var videoId = video.id.videoId;
-      var videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
-      var thumbnailUrl = video.snippet.thumbnails.default.url;
-      var listItem = document.createElement("li");
-      var link = document.createElement("a");
-      link.href = videoUrl;
-      link.target = "_blank";
-      var thumbnail = document.createElement("img");
-      thumbnail.src = thumbnailUrl;
-      thumbnail.alt = "Video Thumbnail";
-      thumbnail.width = 200;
-      link.appendChild(thumbnail);
-      link.appendChild(document.createTextNode(videoTitle));
-      listItem.appendChild(link);
-      trailerView.appendChild(listItem);
-    });
-  });
-  $("#clear-button").on("click", function () {
-    $(".castsCard").empty();
-    $(".awardsCard").empty();
-    $(".posterCard").empty();
-    $(".card-trailer").empty();
+$("#clear-button").on("click", function(){
+    $('.castsCard').empty();
+    $('.awardsCard').empty();
+    $('.posterCard').empty();
     location.reload();
-  });
-}
+    })
+      
+
 
 $("#clear-button").on("click", function () {
   $(".castsCard").empty();
@@ -326,3 +287,5 @@ function searchVideos(event) {
     });
 }
 })
+
+
