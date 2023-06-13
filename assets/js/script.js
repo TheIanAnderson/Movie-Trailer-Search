@@ -9,7 +9,8 @@ var trailerView = document.querySelector(".card-trailer");
 var rowCards = $("#demo-carousel");
 
 var YOUTUBE_API_KEY = "AIzaSyCVhc2HYUCAa6IUoFoaGwbP7C72QinwRiY";
-var submit = document.getElementById('search-button')
+var submit = document.getElementById('search-button');
+var last_Search = JSON.parse(localStorage.getItem("Last Search")) || [];
 
 
 $(document).ready(function () {
