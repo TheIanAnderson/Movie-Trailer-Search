@@ -6,7 +6,7 @@ var castsView = document.querySelector(".castsCard");
 var awardView = document.querySelector(".awardsCard");
 var trailerView = document.querySelector(".card-trailer");
 var rowCards = $("#demo-carousel");
-var YOUTUBE_API_KEY = "AIzaSyCVhc2HYUCAa6IUoFoaGwbP7C72QinwRiY";
+var YOUTUBE_API_KEY = "AIzaSyCLD0wSTrNrXqjaMxXJsX_OAb0toL_8KAI";
 var submit = document.getElementById('search-button');
 var last_Search = JSON.parse(localStorage.getItem("Last Search"));
 
@@ -194,13 +194,12 @@ function movieRatings(userInput) {
   function searchVideos(movieTitle) {
     $(".card-content-trailer").empty();
     var searchQuery = $("#movie").val();
-    var apiKey = "AIzaSyADZUckXGxWF2br2X7u0XbiPyzbPzdvb0Q";
     var keyword = "movie";
     var requestUrl;
     if (searchQuery) {
-      requestUrl = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&part=snippet&maxResults=20&q=${searchQuery}+${keyword}`;
+      requestUrl = `https://www.googleapis.com/youtube/v3/search?key=${YOUTUBE_API_KEY}&part=snippet&maxResults=20&q=${searchQuery}+${keyword}`;
     } else {
-      requestUrl = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&part=snippet&maxResults=20&q=${movieTitle}+${keyword}`;
+      requestUrl = `https://www.googleapis.com/youtube/v3/search?key=${YOUTUBE_API_KEY}&part=snippet&maxResults=20&q=${movieTitle}+${keyword}`;
     }
     $.ajax({
       url: requestUrl,
