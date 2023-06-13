@@ -228,7 +228,7 @@ function searchVideos(movieTitle) {
     $(".castsCard").empty();
     $(".awardsCard").empty();
     $(".posterCard").empty();
-    $(".card-trailer").empty();
+    $(".card-content-trailer").empty();
     location.reload();
   });
 
