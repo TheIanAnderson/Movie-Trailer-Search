@@ -6,7 +6,8 @@ var castsView = document.querySelector(".castsCard");
 var awardView = document.querySelector(".awardsCard");
 var trailerView = document.querySelector(".card-trailer");
 var rowCards = $("#demo-carousel");
-var YOUTUBE_API_KEY = "AIzaSyCLD0wSTrNrXqjaMxXJsX_OAb0toL_8KAI";
+var YOUTUBE_API_KEY = "AIzaSyD7wcqqcLDpQvxlRjus-FJHdFBPEEry_5s"
+
 var submit = document.getElementById('search-button');
 var last_Search = JSON.parse(localStorage.getItem("Last Search"));
 
@@ -215,7 +216,7 @@ function movieRatings(userInput) {
           .attr("src", videoUrl)
           .attr("frameborder", "0")
           .attr("allowfullscreen", true);
-        var listItem = $("<li>").append(iframe);
+        var listItem = $("<a>").append(iframe);
         $(".card-content-trailer").append(listItem);
       });
     });
@@ -230,4 +231,3 @@ function movieRatings(userInput) {
 
 
   submit.addEventListener('click', searchVideos);
-
