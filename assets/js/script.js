@@ -227,6 +227,13 @@ $(document).ready(function(){
         $(".card-content-trailer").append(listItem);
       });
     });
+    $("#clear-button").on("click", function(){
+      $('.castsCard').empty();
+      $('.awardsCard').empty();
+      $('.posterCard').empty();
+      $(".card-content-trailer").empty();
+      location.reload();
+      })
   }
 
   
