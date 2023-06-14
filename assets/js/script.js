@@ -191,14 +191,6 @@ function movieRatings(userInput) {
 }
 
 
-$(document).ready(function(){
-  $('.card-content-trailer').slick({
-    dots: true,
-    speed: 200,
-    slidesToShow: 3,
-    slidesToScroll: 3
-  });
-});
   function searchVideos(movieTitle) {
     $(".card-content-trailer").empty();
     var searchQuery = $("#movie").val();
@@ -218,14 +210,15 @@ $(document).ready(function(){
         var videoId = video.id.videoId;
         var videoUrl = `https://www.youtube.com/embed/${videoId}`;
         var iframe = $("<iframe>")
-          .attr("width", "315")
-          .attr("height", "200")
           .attr("src", videoUrl)
           .attr("frameborder", "0")
           .attr("allowfullscreen", true);
-        var listItem = $("<div>").append(iframe);
-        $(".card-content-trailer").append(listItem);
+        var carouselItem = $('<a>')
+          .addClass('carousel-item')
+          .append(iframe);
+        $('#demo-carousel').append(carouselItem)
       });
+      $('.carousel').carousel()
     });
     $("#clear-button").on("click", function(){
       $('.castsCard').empty();
@@ -236,8 +229,5 @@ $(document).ready(function(){
       })
   }
 
-  
-
 
   submit.addEventListener('click', searchVideos);
-
