@@ -216,7 +216,7 @@ function movieRatings(userInput) {
           .attr("src", videoUrl)
           .attr("frameborder", "0")
           .attr("allowfullscreen", true);
-        var listItem = $("<li>").append(iframe);
+        var listItem = $("<a>").append(iframe);
         $(".card-content-trailer").append(listItem);
       });
     });
