@@ -191,6 +191,14 @@ function movieRatings(userInput) {
 }
 
 
+$(document).ready(function(){
+  $('.card-content-trailer').slick({
+    dots: true,
+    speed: 200,
+    slidesToShow: 3,
+    slidesToScroll: 3
+  });
+});
   function searchVideos(movieTitle) {
     $(".card-content-trailer").empty();
     var searchQuery = $("#movie").val();
@@ -215,11 +223,13 @@ function movieRatings(userInput) {
           .attr("src", videoUrl)
           .attr("frameborder", "0")
           .attr("allowfullscreen", true);
-        var listItem = $("<li>").append(iframe);
+        var listItem = $("<div>").append(iframe);
         $(".card-content-trailer").append(listItem);
       });
     });
   }
+
+  
 
 
   submit.addEventListener('click', searchVideos);
