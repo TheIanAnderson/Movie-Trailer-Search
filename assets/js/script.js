@@ -6,7 +6,8 @@ var castsView = document.querySelector(".castsCard");
 var awardView = document.querySelector(".awardsCard");
 var trailerView = document.querySelector(".card-trailer");
 var rowCards = $("#demo-carousel");
-var YOUTUBE_API_KEY = "AIzaSyCLD0wSTrNrXqjaMxXJsX_OAb0toL_8KAI";
+var YOUTUBE_API_KEY = "AIzaSyD7wcqqcLDpQvxlRjus-FJHdFBPEEry_5s"
+
 var submit = document.getElementById('search-button');
 var last_Search = JSON.parse(localStorage.getItem("Last Search"));
 
@@ -210,15 +211,14 @@ function movieRatings(userInput) {
         var videoId = video.id.videoId;
         var videoUrl = `https://www.youtube.com/embed/${videoId}`;
         var iframe = $("<iframe>")
+          .attr("width", "315")
+          .attr("height", "200")
           .attr("src", videoUrl)
           .attr("frameborder", "0")
           .attr("allowfullscreen", true);
-        var carouselItem = $('<a>')
-          .addClass('carousel-item')
-          .append(iframe);
-        $('#demo-carousel').append(carouselItem)
+        var listItem = $("<li>").append(iframe);
+        $(".card-content-trailer").append(listItem);
       });
-      $('.carousel').carousel()
     });
     $("#clear-button").on("click", function(){
       $('.castsCard').empty();
