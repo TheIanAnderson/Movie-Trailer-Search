@@ -193,8 +193,11 @@ function movieRatings(userInput) {
 
 
   function searchVideos(movieTitle) {
+    // Makes sure the card content trailer class is empty before running
     $(".card-content-trailer").empty();
+    // Retrieves the value from the input field
     var searchQuery = $("#movie").val();
+    // Establishes keyword to insert into the URL to filter innaccurate search results
     var keyword = "movie";
     var requestUrl;
     if (searchQuery) {
@@ -202,24 +205,29 @@ function movieRatings(userInput) {
     } else {
       requestUrl = `https://www.googleapis.com/youtube/v3/search?key=${YOUTUBE_API_KEY}&part=snippet&maxResults=20&q=${movieTitle}+${keyword}`;
     }
+    // Jquery fethch the API
     $.ajax({
       url: requestUrl,
       method: "GET",
     }).then(function (data) {
+      // Limit youtube api search to only 3 results
       var videoItems = data.items.slice(0, 3);
       videoItems.forEach(function (video) {
         var videoId = video.id.videoId;
         var videoUrl = `https://www.youtube.com/embed/${videoId}`;
+        // Create iframe and set iframe attributes0
         var iframe = $("<iframe>")
           .attr("width", "315")
           .attr("height", "200")
           .attr("src", videoUrl)
           .attr("frameborder", "0")
           .attr("allowfullscreen", true);
+          // Appends iframe in card-container-trailer
         var listItem = $("<a>").append(iframe);
         $(".card-content-trailer").append(listItem);
       });
     });
+    // Adds functionality to clear-button and removes searched date from page
     $("#clear-button").on("click", function(){
       $('.castsCard').empty();
       $('.awardsCard').empty();
