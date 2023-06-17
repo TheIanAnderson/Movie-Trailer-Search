@@ -33,7 +33,6 @@ $(document).ready(function () {
       movieCastSearch(userInput);
       moviePoster(userInput);
       movieAwards(userInput);
-      movieRatings(userInput);
       searchVideos(userInput);
       $("#movie").val("");
     }
