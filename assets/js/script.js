@@ -238,4 +238,3 @@ function movieRatings(userInput) {
   }
 
 
-  submit.addEventListener('click', searchVideos);
