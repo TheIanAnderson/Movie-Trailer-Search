@@ -191,49 +191,62 @@ function movieRatings(userInput) {
 }
 
 
-  function searchVideos(movieTitle) {
-    // Makes sure the card content trailer class is empty before running
-    $(".card-content-trailer").empty();
-    // Retrieves the value from the input field
-    var searchQuery = $("#movie").val();
-    // Establishes keyword to insert into the URL to filter innaccurate search results
-    var keyword = "movie";
-    var requestUrl;
-    if (searchQuery) {
-      requestUrl = `https://www.googleapis.com/youtube/v3/search?key=${YOUTUBE_API_KEY}&part=snippet&maxResults=20&q=${searchQuery}+${keyword}`;
-    } else {
-      requestUrl = `https://www.googleapis.com/youtube/v3/search?key=${YOUTUBE_API_KEY}&part=snippet&maxResults=20&q=${movieTitle}+${keyword}`;
-    }
-    // Jquery fethch the API
-    $.ajax({
-      url: requestUrl,
-      method: "GET",
-    }).then(function (data) {
-      // Limit youtube api search to only 3 results
-      var videoItems = data.items.slice(0, 3);
-      videoItems.forEach(function (video) {
-        var videoId = video.id.videoId;
-        var videoUrl = `https://www.youtube.com/embed/${videoId}`;
-        // Create iframe and set iframe attributes0
-        var iframe = $("<iframe>")
-          .attr("width", "315")
-          .attr("height", "200")
-          .attr("src", videoUrl)
-          .attr("frameborder", "0")
-          .attr("allowfullscreen", true);
-          // Appends iframe in card-container-trailer
-        var listItem = $("<a>").append(iframe);
-        $(".card-content-trailer").append(listItem);
-      });
-    });
-    // Adds functionality to clear-button and removes searched date from page
-    $("#clear-button").on("click", function(){
-      $('.castsCard').empty();
-      $('.awardsCard').empty();
-      $('.posterCard').empty();
-      $(".card-content-trailer").empty();
-      location.reload();
-      })
+function searchVideos(movieTitle) {
+  var $carousel = $(".card-content-trailer");
+
+  $carousel.empty();
+
+  var searchQuery = $("#movie").val();
+  var keyword = "movie";
+  var requestUrl;
+
+  if (searchQuery) {
+    requestUrl = `https://www.googleapis.com/youtube/v3/search?key=${YOUTUBE_API_KEY}&part=snippet&maxResults=20&q=${searchQuery}+${keyword}`;
+  } else {
+    requestUrl = `https://www.googleapis.com/youtube/v3/search?key=${YOUTUBE_API_KEY}&part=snippet&maxResults=20&q=${movieTitle}+${keyword}`;
   }
 
+  $.ajax({
+    url: requestUrl,
+    method: "GET",
+  }).then(function (data) {
+    var videoItems = data.items.slice(0, 4);
+
+    // Create a new carousel clone
+    var $newCarousel = $carousel.clone();
+
+    videoItems.forEach(function (video) {
+      var videoId = video.id.videoId;
+      var videoUrl = `https://www.youtube.com/embed/${videoId}`;
+      var iframe = $("<iframe>")
+        .attr("width", "315")
+        .attr("height", "200")
+        .attr("src", videoUrl)
+        .attr("frameborder", "0")
+        .attr("allowfullscreen", true);
+      var listItem = $("<a>").append(iframe);
+      $newCarousel.append(listItem);
+    });
+
+    // Replace the original carousel with the new clone
+    $carousel.replaceWith($newCarousel);
+
+    // Initialize the carousel on the new clone
+    $newCarousel.slick({
+      slidesToShow: 3,
+      slidesToScroll: 1,
+      autoplay: true,
+      autoplaySpeed: 3000,
+      dots: true,
+    });
+  });
+
+  $("#clear-button").on("click", function () {
+    $('.castsCard').empty();
+    $('.awardsCard').empty();
+    $('.posterCard').empty();
+    $carousel.empty();
+    location.reload();
+  });
+}
 
