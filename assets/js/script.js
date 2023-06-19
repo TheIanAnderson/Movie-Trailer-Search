@@ -6,7 +6,7 @@ var castsView = document.querySelector(".castsCard");
 var awardView = document.querySelector(".awardsCard");
 var trailerView = document.querySelector(".card-trailer");
 var rowCards = $("#demo-carousel");
-var YOUTUBE_API_KEY = "AIzaSyD7wcqqcLDpQvxlRjus-FJHdFBPEEry_5s"
+var YOUTUBE_API_KEY = "AIzaSyBYN8k-tLB6UeGCFtP3Lh08rIZM8x5pSWc"
 
 var submit = document.getElementById('search-button');
 var last_Search = JSON.parse(localStorage.getItem("Last Search"));
@@ -116,7 +116,7 @@ function moviePoster(userInput) {
     }).then(function (res) {
       // console.log(res);
       $(".card-image").html("");
-      var numOfPosters = Math.min(1, res.posters.length);
+      var numOfPosters = Math.min(5, res.posters.length);
       if(res.posters){
       for (var i = 0; i < numOfPosters; i++) {
         var newImg = $("<img>")
@@ -125,6 +125,13 @@ function moviePoster(userInput) {
         $(".card-image").append(newImg);
       }
       }
+      $('.card-image').slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplay: false,
+        dots: true,
+        infinite: true,
+      });
     });
   });
 }
@@ -193,12 +200,16 @@ function movieRatings(userInput) {
 
 
 function searchVideos(movieTitle) {
+  
   var $carousel = $(".card-content-trailer");
-
+// Clears carousel on function run
   $carousel.empty();
 
+  // Pulls data from the user input field
   var searchQuery = $("#movie").val();
+  //Inserts a key word to the searchQuery to make consistent results
   var keyword = "movie";
+  
   var requestUrl;
 
   if (searchQuery) {
@@ -207,11 +218,13 @@ function searchVideos(movieTitle) {
     requestUrl = `https://www.googleapis.com/youtube/v3/search?key=${YOUTUBE_API_KEY}&part=snippet&maxResults=20&q=${movieTitle}+${keyword}`;
   }
 
+  // JQ fetch of the api
   $.ajax({
     url: requestUrl,
     method: "GET",
   }).then(function (data) {
-    var videoItems = data.items.slice(0, 4);
+    // Limit youtube API pull by 10 searches to be appended as an iframe
+    var videoItems = data.items.slice(0, 10);
 
     // Create a new carousel clone
     var $newCarousel = $carousel.clone();
@@ -232,16 +245,19 @@ function searchVideos(movieTitle) {
     // Replace the original carousel with the new clone
     $carousel.replaceWith($newCarousel);
 
-    // Initialize the carousel on the new clone
+    // Initializes the carousel to the iframes
     $newCarousel.slick({
       slidesToShow: 3,
       slidesToScroll: 1,
       autoplay: true,
-      autoplaySpeed: 3000,
+      autoplaySpeed: 5000,
       dots: true,
+      infinite: true,
     });
   });
 
+
+  //  Adds functionality to clear search button
   $("#clear-button").on("click", function () {
     $('.castsCard').empty();
     $('.awardsCard').empty();
