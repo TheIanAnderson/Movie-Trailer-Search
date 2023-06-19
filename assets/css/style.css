@@ -115,3 +115,8 @@ h4 {
   font-size: 20px;
   text-align: center;
 }
+
+.card-content-trailer {
+  max-width: 1200px;
+}
+
