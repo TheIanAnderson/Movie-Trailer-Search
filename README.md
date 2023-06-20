@@ -1,7 +1,12 @@
 # Movie Trailer Search
 When a user visits our site, they are presented with a search-bar with a search form that enables them to enter in a movie they want and clicking the search button. Upon clicking the button, the user will be presented with information about the movie’s ratings on IMDB including any awards they won, carousel of posters, main cast members, and several movie trailers for the movie embedded in the website from YouTube videos. 
 
+## Usage
+To search up a movie, enter the movie's title in the search bar, and click "Search." Information about the movie's cast, awards, posters, and embedded YouTube movie trailers will then populate the empty cards on the webpage. The user then only has to look at the information provided, and press the "play" button on a youtube trailer to watch it.
 
+To clear results, press the "Clear Results" button.
+
+To re-populate the webpage with information from your last search, press the "Last Search" button.
 
 ## ## Website Preview
 [Movie Trailer Search Website Link](https://theiananderson.github.io/Movie-Trailer-Search/)
@@ -9,8 +14,6 @@ When a user visits our site, they are presented with a search-bar with a search 
 ![alt](assets/images/Website.png)mobileWebsite
 ## Mobile Website Preview
 ![alt](assets/images/mobileWebsite.png)
-
-
 
 ## Technologies Used
 
