@@ -102,9 +102,7 @@ function movieCastSearch(userInput) {
       url: movieCastsURL,
       method: "GET",
     }).then(function (res) {
-        console.log(res.actors);
       for (var i = 0; i < 10; i++) {
-        console.log("actor" + i + ":" + res.actors[i].name);
         var listItem = document.createElement("li");
         var details = document.createTextNode(res.actors[i].name);
         listItem.append(details);

@@ -143,3 +143,9 @@ h3 {
 .card-content-trailer {
   max-width: 1200px;
 }
+
+.card-content-trailer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
