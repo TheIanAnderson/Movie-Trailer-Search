@@ -1,6 +1,9 @@
 body {
     color: whitesmoke;
     font-family: "New Roman";
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1 1 0;
   }
 
 h2 {
@@ -34,6 +37,7 @@ input  {
 .btn-group {
   /* position: relative; */
   /* display: -ms-inline-flexbox; */
+  margin: 5%;
   display: flex;
   vertical-align: middle;
   justify-content: center;
@@ -75,7 +79,7 @@ input  {
 }
 
 .carousel .carousel-item.active {
-  display: block;
+  display: flex;
 }
 
 body {
@@ -122,8 +126,7 @@ h4 {
 }
 
 .trailer-container {
-  overflow: scroll;
-  max-width: 25%;
+  overflow-x: scroll;
 }
 
 .loader {
@@ -133,14 +136,6 @@ h4 {
   width: 120px;
   height: 120px;
   animation: spin 2s linear infinite;
-}
-
-.loader-hidden {
-  display: none;
-}
-
-.loader-view {
-  display: flex;
 }
 
 @keyframes spin {

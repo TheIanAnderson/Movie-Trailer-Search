@@ -49,12 +49,10 @@ $(document).ready(function () {
       url: movieURL,
       method: "GET",
       beforeSend: function() {
-        loadingIcon.classList.remove("loader-hidden");
-        loadingIcon.classList.add("loader-display");
+        loadingIcon.appendTo($(".overlay"));
       },
       success: function() {
-        loadingIcon.classList.remove("loader-display");
-        loadingIcon.classList.add("loader-hidden");
+        loadingIcon.remove($(".overlay"));
       },
     }).then(function (res) {
       console.log(res);
@@ -127,12 +125,12 @@ function moviePoster(userInput) {
     url: movieURL,
     method: "GET",
     beforeSend: function() {
-      loadingIcon.appendTo('.posterCard');
+      loadingIcon.appendTo($('.posterCard'));
     },
     success: function() {
-      loadingIcon.remove();
+      loadingIcon.remove($('.posterCard'));
     },
-  }).then(function (res) {
+    }).then(function (res) {
     // console.log("id " + res.results[0].id);
     var movieId = res.results[0].id;
     let moviePosterURL =
@@ -142,12 +140,12 @@ function moviePoster(userInput) {
       url: moviePosterURL,
       method: "GET",
       beforeSend: function() {
-        loadingIcon.appendTo('.posterCard');
+        loadingIcon.appendTo($('.posterCard'));
       },
       success: function() {
-        loadingIcon.remove();
+        loadingIcon.remove($('.posterCard'));
       },
-    }).then(function (res) {
+      }).then(function (res) {
       // console.log(res);
       $(".card-image").html("");
       var numOfPosters = Math.min(5, res.posters.length);
@@ -179,12 +177,12 @@ function movieAwards(userInput) {
     url: movieURL,
     method: "GET",
     beforeSend: function() {
-      loadingIcon.appendTo('.awardsDesc');
+      loadingIcon.appendTo($('.awardsDesc'));
     },
     success: function() {
-      loadingIcon.remove();
+      loadingIcon.remove($('.awardsDesc'));
     },
-  }).then(function (res) {
+    }).then(function (res) {
     // console.log(res);
     // console.log(res.results[0]);
     // console.log("id " + res.results[0].id);
@@ -196,12 +194,12 @@ function movieAwards(userInput) {
       url: movieCastsURL,
       method: "GET",
       beforeSend: function() {
-        loadingIcon.appendTo('.awardsDesc');
+        loadingIcon.appendTo($('.awardsDesc'));
       },
       success: function() {
-        loadingIcon.remove();
+        loadingIcon.remove($('.awardsDesc'));
       },
-     }).then(function (res) {
+      }).then(function (res) {
       console.log(res);
       console.log(res.description);
       console.log(res.items);
@@ -227,10 +225,10 @@ function movieRatings(userInput) {
     url: movieURL,
     method: "GET",
     beforeSend: function() {
-      loadingIcon.appendTo('.movieRatings');
+      loadingIcon.appendTo($('.movieRatings'));
     },
     success: function() {
-      loadingIcon.remove();
+      loadingIcon.remove($('.movieRatings'));
     },
     }).then(function (res) {
     console.log(res);
@@ -242,10 +240,10 @@ function movieRatings(userInput) {
       url: movieRatingsURL,
       method: "GET",
       beforeSend: function() {
-      loadingIcon.appendTo('.movieRatings');
+        loadingIcon.appendTo($('.movieRatings'));
       },
       success: function() {
-      loadingIcon.remove();
+        loadingIcon.remove($('.movieRatings'));
       },
       }).then(function (res) {
       console.log(res);
@@ -281,10 +279,10 @@ function searchVideos(movieTitle) {
     url: requestUrl,
     method: "GET",
     beforeSend: function() {
-      loadingIcon.appendTo('.card-content-trailer');
+      loadingIcon.appendTo($('.card-content-trailer'));
     },
     success: function() {
-      loadingIcon.remove();
+      loadingIcon.remove($('.card-content-trailer'));
     },
     }).then(function (data) {
     // Limit youtube API pull by 10 searches to be appended as an iframe
