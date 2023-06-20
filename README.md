@@ -39,7 +39,8 @@ When a user visits our site, they are presented with a search-bar with a search 
 [![name](assets/images/htmlref.png)](https://www.w3schools.com/tags/tag_meta.asp)
 
 ## Thank you all
-Everyone helped in this first challenge. Study group also helped in this process. Thank you to everyone.
+Everyone helped in this first project. Thank you to everyone, the study group, instructor, TAs, and tutors helped us a lot!
+
 ## License
 MIT License
 Copyright (c) [year] [fullname]
