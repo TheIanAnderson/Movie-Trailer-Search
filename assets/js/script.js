@@ -8,6 +8,8 @@ var trailerView = document.querySelector(".card-trailer");
 var rowCards = $("#demo-carousel");
 var YOUTUBE_API_KEY = "AIzaSyBYN8k-tLB6UeGCFtP3Lh08rIZM8x5pSWc"
 
+var loadingIcon = $("<div class='loader' id='loader'></div>");
+
 var submit = document.getElementById('search-button');
 var last_Search = JSON.parse(localStorage.getItem("Last Search"));
 
@@ -70,7 +72,13 @@ function movieCastSearch(userInput) {
   $.ajax({
     url: movieURL,
     method: "GET",
-  }).then(function (res) {
+    beforeSend: function() {
+      loadingIcon.appendTo('.castsCard');
+    },
+    success: function() {
+      loadingIcon.remove();
+    },
+    }).then(function (res) {
     // console.log(res);
     // console.log(res.results[0]);
     // console.log("id " + res.results[0].id);
@@ -83,6 +91,12 @@ function movieCastSearch(userInput) {
     $.ajax({
       url: movieCastsURL,
       method: "GET",
+      beforeSend: function() {
+        loadingIcon.appendTo('.castsCard');
+      },
+      success: function() {
+        loadingIcon.remove();
+      },
     }).then(function (res) {
       //   console.log(res.actors);
       for (var i = 0; i < 10; i++) {
@@ -104,6 +118,12 @@ function moviePoster(userInput) {
   $.ajax({
     url: movieURL,
     method: "GET",
+    beforeSend: function() {
+      loadingIcon.appendTo('.posterCard');
+    },
+    success: function() {
+      loadingIcon.remove();
+    },
   }).then(function (res) {
     // console.log("id " + res.results[0].id);
     var movieId = res.results[0].id;
@@ -113,6 +133,12 @@ function moviePoster(userInput) {
     $.ajax({
       url: moviePosterURL,
       method: "GET",
+      beforeSend: function() {
+        loadingIcon.appendTo('.posterCard');
+      },
+      success: function() {
+        loadingIcon.remove();
+      },
     }).then(function (res) {
       // console.log(res);
       $(".card-image").html("");
@@ -144,6 +170,12 @@ function movieAwards(userInput) {
   $.ajax({
     url: movieURL,
     method: "GET",
+    beforeSend: function() {
+      loadingIcon.appendTo('.awardsDesc');
+    },
+    success: function() {
+      loadingIcon.remove();
+    },
   }).then(function (res) {
     // console.log(res);
     // console.log(res.results[0]);
@@ -155,7 +187,13 @@ function movieAwards(userInput) {
     $.ajax({
       url: movieCastsURL,
       method: "GET",
-    }).then(function (res) {
+      beforeSend: function() {
+        loadingIcon.appendTo('.awardsDesc');
+      },
+      success: function() {
+        loadingIcon.remove();
+      },
+     }).then(function (res) {
       console.log(res);
       console.log(res.description);
       console.log(res.items);
@@ -180,7 +218,13 @@ function movieRatings(userInput) {
   $.ajax({
     url: movieURL,
     method: "GET",
-  }).then(function (res) {
+    beforeSend: function() {
+      loadingIcon.appendTo('.movieRatings');
+    },
+    success: function() {
+      loadingIcon.remove();
+    },
+    }).then(function (res) {
     console.log(res);
     var movieId = res.results[0].id;
     let movieRatingsURL =
@@ -189,7 +233,13 @@ function movieRatings(userInput) {
     $.ajax({
       url: movieRatingsURL,
       method: "GET",
-    }).then(function (res) {
+      beforeSend: function() {
+      loadingIcon.appendTo('.movieRatings');
+      },
+      success: function() {
+      loadingIcon.remove();
+      },
+      }).then(function (res) {
       console.log(res);
       console.log(res.imDb);
       // $(".movieRatings").text("Ratings");
@@ -222,7 +272,13 @@ function searchVideos(movieTitle) {
   $.ajax({
     url: requestUrl,
     method: "GET",
-  }).then(function (data) {
+    beforeSend: function() {
+      loadingIcon.appendTo('.card-content-trailer');
+    },
+    success: function() {
+      loadingIcon.remove();
+    },
+    }).then(function (data) {
     // Limit youtube API pull by 10 searches to be appended as an iframe
     var videoItems = data.items.slice(0, 10);
 
