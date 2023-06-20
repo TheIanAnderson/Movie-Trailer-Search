@@ -52,7 +52,7 @@ $(document).ready(function () {
         loadingIcon.appendTo($(".overlay"));
       },
       success: function() {
-        loadingIcon.remove($(".overlay"));
+        loadingIcon.remove();
       },
     }).then(function (res) {
       console.log(res);
@@ -82,7 +82,7 @@ function movieCastSearch(userInput) {
       loadingIcon.appendTo($('.castsCard'));
     },
     success: function() {
-      loadingIcon.remove($('.castsCard'));
+      loadingIcon.remove();
     },
     }).then(function (res) {
     // console.log(res);
@@ -101,7 +101,7 @@ function movieCastSearch(userInput) {
         loadingIcon.appendTo($('.castsCard'));
       },
       success: function() {
-        loadingIcon.remove($('.castsCard'));
+        loadingIcon.remove();
       },
       }).then(function (res) {
       //   console.log(res.actors);
@@ -128,7 +128,7 @@ function moviePoster(userInput) {
       loadingIcon.appendTo($('.posterCard'));
     },
     success: function() {
-      loadingIcon.remove($('.posterCard'));
+      loadingIcon.remove();
     },
     }).then(function (res) {
     // console.log("id " + res.results[0].id);
@@ -143,7 +143,7 @@ function moviePoster(userInput) {
         loadingIcon.appendTo($('.posterCard'));
       },
       success: function() {
-        loadingIcon.remove($('.posterCard'));
+        loadingIcon.remove();
       },
       }).then(function (res) {
       // console.log(res);
@@ -180,7 +180,7 @@ function movieAwards(userInput) {
       loadingIcon.appendTo($('.awardsDesc'));
     },
     success: function() {
-      loadingIcon.remove($('.awardsDesc'));
+      loadingIcon.remove();
     },
     }).then(function (res) {
     // console.log(res);
@@ -197,7 +197,7 @@ function movieAwards(userInput) {
         loadingIcon.appendTo($('.awardsDesc'));
       },
       success: function() {
-        loadingIcon.remove($('.awardsDesc'));
+        loadingIcon.remove();
       },
       }).then(function (res) {
       console.log(res);
@@ -228,7 +228,7 @@ function movieRatings(userInput) {
       loadingIcon.appendTo($('.movieRatings'));
     },
     success: function() {
-      loadingIcon.remove($('.movieRatings'));
+      loadingIcon.remove();
     },
     }).then(function (res) {
     console.log(res);
@@ -243,7 +243,7 @@ function movieRatings(userInput) {
         loadingIcon.appendTo($('.movieRatings'));
       },
       success: function() {
-        loadingIcon.remove($('.movieRatings'));
+        loadingIcon.remove();
       },
       }).then(function (res) {
       console.log(res);
@@ -282,7 +282,7 @@ function searchVideos(movieTitle) {
       loadingIcon.appendTo($('.card-content-trailer'));
     },
     success: function() {
-      loadingIcon.remove($('.card-content-trailer'));
+      loadingIcon.remove();
     },
     }).then(function (data) {
     // Limit youtube API pull by 10 searches to be appended as an iframe
