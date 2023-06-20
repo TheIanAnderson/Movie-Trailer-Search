@@ -78,8 +78,7 @@ $(document).ready(function () {
         MovieID: id,
       };
       localStorage.setItem("Last Search", JSON.stringify(searchInfo));
-      // Sending Movie title to storeData to avoid dupliocates
-      storeData(res.expression);
+
     });
   }
 });
