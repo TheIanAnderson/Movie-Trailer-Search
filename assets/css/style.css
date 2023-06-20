@@ -4,6 +4,8 @@ body {
     display: flex;
     flex-wrap: wrap;
     flex: 1 1 0;
+    justify-content: center;
+    align-items: center;
   }
 
 h2 {
@@ -37,7 +39,7 @@ input  {
 .btn-group {
   /* position: relative; */
   /* display: -ms-inline-flexbox; */
-  margin: 5%;
+  margin: 10px;
   display: flex;
   vertical-align: middle;
   justify-content: center;
@@ -127,6 +129,12 @@ h4 {
 
 .trailer-container {
   overflow-x: scroll;
+  text-align: center;
+}
+
+aside {
+  margin-left: 2.5%;
+  max-width: 95%;
 }
 
 .loader {
