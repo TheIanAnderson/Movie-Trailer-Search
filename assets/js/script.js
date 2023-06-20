@@ -48,6 +48,14 @@ $(document).ready(function () {
     $.ajax({
       url: movieURL,
       method: "GET",
+      beforeSend: function() {
+        loadingIcon.classList.remove("loader-hidden");
+        loadingIcon.classList.add("loader-display");
+      },
+      success: function() {
+        loadingIcon.classList.remove("loader-display");
+        loadingIcon.classList.add("loader-hidden");
+      },
     }).then(function (res) {
       console.log(res);
       //   console.log(res.results[0]);
@@ -73,10 +81,10 @@ function movieCastSearch(userInput) {
     url: movieURL,
     method: "GET",
     beforeSend: function() {
-      loadingIcon.appendTo('.castsCard');
+      loadingIcon.appendTo($('.castsCard'));
     },
     success: function() {
-      loadingIcon.remove();
+      loadingIcon.remove($('.castsCard'));
     },
     }).then(function (res) {
     // console.log(res);
@@ -92,12 +100,12 @@ function movieCastSearch(userInput) {
       url: movieCastsURL,
       method: "GET",
       beforeSend: function() {
-        loadingIcon.appendTo('.castsCard');
+        loadingIcon.appendTo($('.castsCard'));
       },
       success: function() {
-        loadingIcon.remove();
+        loadingIcon.remove($('.castsCard'));
       },
-    }).then(function (res) {
+      }).then(function (res) {
       //   console.log(res.actors);
       for (var i = 0; i < 10; i++) {
         // console.log("actor" + i + ":" + res.actors[i].name);
