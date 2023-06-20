@@ -1,151 +1,151 @@
 body {
-    color: whitesmoke;
-    font-family: "New Roman";
-    cursor: pointer;
-  }
+  color: whitesmoke;
+  font-family: "New Roman";
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1 1 0;
+  justify-content: center;
+  align-items: center;
+}
 
 h2 {
-  color: white;
-  font-weight: bolder;
+color: white;
+font-weight: bolder;
 }
 
 div.overlay {
-    background-color:rgba(60, 68, 68, 0.8);
-    color:white;
-    font-weight: bold;
-  }
-  
+  background-color:rgba(60, 68, 68, 0.8);
+  color:white;
+  font-weight: bold;
+}
+
 input  {
-      color: white;
-  }
+    color: white;
+}
 
 .overlay {
-  /* margin-top: 200px; */
-  justify-content: center;
-  align-items: flex-start;
-  margin-top: 20px;
+/* margin-top: 200px; */
+justify-content: center;
+align-items: flex-start;
+margin-top: 20px;
 }
 
 .card-image{
-  max-width: 100%;
-  height: auto;
-  object-fit: cover;
+max-width: 100%;
+height: auto;
+object-fit: cover;
 }
 
 .btn-group {
-  position: relative;
-  display: -ms-inline-flexbox;
-  display: flex;
-  vertical-align: middle;
-  justify-content: center;
+/* position: relative; */
+/* display: -ms-inline-flexbox; */
+margin: 10px;
+display: flex;
+vertical-align: middle;
+justify-content: center;
 }
 
 .greater-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color:rgba(242, 230, 230, 0.792);
+display: flex;
+align-items: center;
+justify-content: center;
+background-color:rgba(242, 230, 230, 0.792);
 }
 
-.button-container, .savedBtn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: Arial, Helvetica, sans-serif;
-  margin: 10px ;
-  margin-bottom: 20px;
+.button-container {
+display: flex;
+align-items: center;
+justify-content: center;
+font-family: Arial, Helvetica, sans-serif;
+margin: 10px ;
+margin-bottom: 20px;
 }
 
 #movie-name {
-  text-align: center;
+text-align: center;
 }
 
 .card{
-    overflow: visible;
+  overflow: visible;
 }
 
 .carousel-item img {
-  max-width: 200px;
-  max-height: 200px;
+max-width: 200px;
+max-height: 200px;
 }
 
 .tabs-content.carousel .carousel-item { height: 100%; }
 
 .carousel .carousel-item {
-  display: none;
+display: none;
 }
 
 .carousel .carousel-item.active {
-  display: block;
+display: flex;
 }
 
 body {
-  margin: 0;
-  padding: 0;
-  background-color: coral;
+margin: 0;
+padding: 0;
+background-color: coral;
 }
 
 a {
-  height: 900px;
-  width: 650px;
+height: 900px;
+width: 650px;
+}
+
+.carousel {
+height: 800px;
+perspective: 950px;
+transform: translateY(-100px);
+}
+
+.carousel carousel-item {
+width: 7050px;
+}
+
+img {
+width: 100%;
+height: 200px;
 }
 
 h4 {
-  margin: 0;
-  padding: 0;
-  background: #fff;
-  color: #000;
-  box-sizing: border-box;
-  padding: 10px 5px;
-  font-weight: bold;
-  font-size: 20px;
-  text-align: center;
+margin: 0;
+padding: 0;
+background: #fff;
+color: #000;
+box-sizing: border-box;
+padding: 10px 5px;
+font-weight: bold;
+font-size: 20px;
+text-align: center;
 }
 
 .card-content-trailer {
-  max-width: 1200px;
+padding: 5px;
 }
 
-#loading-icon {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
+.trailer-container {
+overflow-x: scroll;
+text-align: center;
 }
 
-#loading-icon img {
-  width: 100px;
-  height: 100px;
+aside {
+margin-left: 2.5%;
+max-width: 95%;
 }
 
-h3 {
-  
-  padding: 5px 5px;
-  font-weight: bold;
-  font-size: 20px;
-  text-align: center;
+.loader {
+border: 16px solid #f3f3f3; /* Light grey */
+border-top: 16px solid #3498db; /* Blue */
+border-radius: 50%;
+width: 120px;
+height: 120px;
+animation: spin 2s linear infinite;
 }
 
-#buttonsList {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-
-.card-content-trailer {
-  max-width: 1200px;
-}
-
-.card-content-trailer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+@keyframes spin {
+0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }
 }

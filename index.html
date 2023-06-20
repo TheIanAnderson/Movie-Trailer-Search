@@ -1,116 +1,108 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <meta name="Description" content="Enter your description here" />
+ <head>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="./assets/css/slick-1.8.1/slick/slick.css"/>
-  <link rel="stylesheet" type="text/css" href="./assets/css/slick-1.8.1/slick/slick-theme.css"/>
+  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.0/slick/slick.css"/>
+  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.0/slick/slick-theme.css"/>
   <link rel="stylesheet" href="./assets/css/style.css">
-  <title>BLOCKBUSTERZ</title>
-</head>
+
+
+ </head>
+
 <body style="background-image: url('./assets/images/vader.jpeg'); background-repeat:no-repeat; background-size: cover;"> 
 <div class="container">
-  <div class="row"> 
-    <div class="col s12">
-      <h2 class="white-text">Movie Trailer Search</h2>
-    </div>
-  </div> 
-
-  <div class="row blue-lightgrey-text "> 
-    <div class="greater-container col l12 s12">
-      <h5 id="movie-name" style="color:whitesmoke;">Enter Movie Name:</h5>
-      <input type="text" style="color:whitesmoke;" id="movie">
-    </div>
-
-    <div class="margin-top button-container col l4 s12">
-      <a class="btn-large btn-group" style="background-color: #ff0800;" type="button" id="search-button"><i class="material-icons left">movie</i>Search</a>
-    </div>
-    <div class="margin-top button-container col l4 s12">
-      <a class="btn-large btn-group" style="background-color: #ff0800;" type="button" id="clear-button"><i class="material-icons left">backspace</i>Clear Results</a>
-    </div>
-    <div class="margin-top button-container col l4 s12">
-      <a class="btn-large" style="background-color: #ff0800;" type="button" id="last-search-button"><i class="material-icons left">replay</i>Last Search</a>
-    </div>
-  </div>
-
-  <div class="row blue-grey darken-2 blue-lightgrey-text lighten-2" id="buttonsList">
-    <!-- <h4>Last 5 searches:</h4> -->
-    <!-- <div class="card" style="width: 18rem;" id="buttonsList"> -->
-        <!-- <div class="d-flex flex-wrap">
-            <!-- Buttons of last search go here -->
-        <!-- </div> --> 
-    <!-- </div> -->
-  </div>
-
-  <div id="loading-icon" style="display: none;">
-    <img src="./assets/images/loading.gif" alt="Loading..." />
-  </div>
-
-  <div class="row"> 
-    <div class="row blue-grey darken-2  blue-lightgrey-text lighten-2">
-    <div class="col s12 m12 l4">
-      <div class="card blue-grey lighten-4">
-        <div class="card-content blue-grey-text">
-          <span class="card-title"><h3>Awards/Ratings</h3></span>    
-          <p class="awardsDesc"></p>
-          <p class="movieRatings"></p>
-          <ol class="awardsCard">
-          </ol>         
-        </div>           
-      </div>
-    </div>
-    <div class="col s12 m12 l4">
-      <div class="card blue-grey lighten-4">
-        <div class="card-content blue-grey-text">
-          <span class="card-title"><h3>Cast</h3></span>
-          <ol class="castsCard">
-          </ol>
-        </div>
-      </div>
-    </div>
-    <div class="col s12 m12 l4">
-      <div class="card blue-grey lighten-4">
-        <div class="card-content blue-grey-text">
-          <span class="card-title"><h3>Poster</h3></span>
-          <div id="carousel-container posterCard">
-            <div id="carousel" class="carousel"></div>
-            <button class="prev-button">Previous</button>
-            <button class="next-button">Next</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- </div> -->
-  <!-- </div> -->
-
-  <!-- <div> -->
-    <Aside>
-      <div class="row  blue-lightgrey-text lighten-2">
+    <div class="row"> 
         <div class="col s12">
+          <h2 class="white-text">Movie Trailer Search</h2>
+        </div>
+      </div> 
+
+    <div class="overlay">
+
+      <div class="row"> 
+
+        <div class="greater-container col l12 s12">
+          <h5 id="movie-name" style="color:whitesmoke;">Enter Movie Name:</h5>
+          <input type="text" style="color:whitesmoke;" id="movie">
+        </div>
+
+        <div class="margin-top button-container col l4 s12">
+          <a class="btn-large btn-group" style="background-color: #ff0800;" type="button" id="search-button"><i class="material-icons left">movie</i>Search</a>
+        </div>
+        <div class="margin-top button-container col l4 s12">
+          <a class="btn-large btn-group" style="background-color: #ff0800;" type="button" id="clear-button"><i class="material-icons left">backspace</i>Clear Results</a>
+        </div>
+        <div class="margin-top button-container col l4 s12">
+          <a class="btn-large btn-group" style="background-color: #ff0800;" type="button" id="last-search-button"><i class="material-icons left">replay</i>Last Search</a>
+        </div>
+        </div>
+      </div> 
+
+      <div class="row"> 
+        <div class="col s12 m4">
           <div class="card blue-grey lighten-4">
-            <div class="blue-grey-text">
-              <span class="card-title"><h3>Trailers, click a link to watch!</h3></span>
-              <div class="card-content-trailer">
-                <!-- Your Slick Carousel content goes here -->
-              </div>
-            </div>
+             <div class="card-content blue-grey-text">
+                <span class="card-title"><h3>Awards & Ratings</h3></span>
+                
+                <p class="awardsDesc"></p>
+                <p class="movieRatings"></p>
+                <ol class="awardsCard">
+                </ol>
+                
+             </div>
+             
+             
+          </div>
+       </div>
+       <div class="col s12 m4">
+        <div class="card blue-grey lighten-4">
+           <div class="card-content blue-grey-text">
+              <span class="card-title"><h3>Cast</h3></span>
+              
+              <ol class="castsCard">
+              </ol>
+           </div>
+
+        </div>
+     </div>
+     <div class="col s12 m4">
+      <div class="card blue-grey lighten-4">
+         <div class="card-content blue-grey-text">
+            <span class="card-title"><h3>Poster</h3></span>
+            <div class="card card-image blue-grey lighten-4">
+            <ol class="posterCard">
+            </ol>
           </div>
         </div>
       </div>
+    </div> 
+
+
+
+    <section>
+        <Aside>
+      <div class="row trailer-container blue-grey darken-2  blue-lightgrey-text lighten-2"><h3>Trailers, click a link to watch!</h3>
+        <div class="col 3">
+            <div class="card blue-grey lighten-4">
+              <div class="card-content-trailer blue-grey-text">
+                <span class="card-title"></span>
+                </div>
+            </div>
+        </div> 
+      
+      </div> 
     </Aside>
-    
+  </section>
 
-  </div>
-
-  <script src="https:/code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="./assets/css/slick-1.8.1/slick/slick.min.js"></script>   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
-  <script src="./assets/js/script.js"></script> 
-<!-- </div> -->
+</div> 
+<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script> 
+<script type = "text/javascript" src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>           
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.0/slick/slick.min.js"></script>
+<script src="./assets/js/script.js"></script> 
 </body>   
 </html>
