@@ -14,8 +14,8 @@ var carouselContainer = $(".carousel");
 var loadingIconEl = $("#loading-icon");
 var movieInputEl = $("#movie");
 var buttonList = $("#buttonsList");
-var YOUTUBE_API_KEY = "AIzaSyBYN8k-tLB6UeGCFtP3Lh08rIZM8x5pSWc";
-// var YOUTUBE_API_KEY = "AIzaSyBwFTI7Sa51Mo1ATzAgIH1hPXYIED0YUzg"
+// var YOUTUBE_API_KEY = "AIzaSyBYN8k-tLB6UeGCFtP3Lh08rIZM8x5pSWc";
+var YOUTUBE_API_KEY = "AIzaSyBwFTI7Sa51Mo1ATzAgIH1hPXYIED0YUzg"
 var submit = document.getElementById('search-button');
 var last_Search = JSON.parse(localStorage.getItem("Last Search"));
 
